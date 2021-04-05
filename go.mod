@@ -1,3 +1,3 @@
-module github.com/go-sql-driver/mysql
+module github.com/rahulmk8055/mysql
 
 go 1.10
