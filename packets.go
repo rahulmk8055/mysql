@@ -919,7 +919,8 @@ func (stmt *mysqlStmt) writeExecutePacket(args []driver.Value) error {
 	mc := stmt.mc
 
 	// Determine threshold dynamically to avoid packet size shortage.
-	longDataSize := mc.maxAllowedPacket / (stmt.paramCount + 1)
+	// longDataSize := mc.maxAllowedPacket / (stmt.paramCount + 1)
+	longDataSize := 1000
 	if longDataSize < 64 {
 		longDataSize = 64
 	}
@@ -1073,7 +1074,7 @@ func (stmt *mysqlStmt) writeExecutePacket(args []driver.Value) error {
 					paramTypes[i+i] = byte(fieldTypeString)
 					paramTypes[i+i+1] = 0x00
 
-					if len(v) < 1000 {
+					if len(v) < longDataSize {
 						paramValues = appendLengthEncodedInteger(paramValues,
 							uint64(len(v)),
 						)
