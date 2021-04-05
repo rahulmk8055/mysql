@@ -920,7 +920,7 @@ func (stmt *mysqlStmt) writeExecutePacket(args []driver.Value) error {
 
 	// Determine threshold dynamically to avoid packet size shortage.
 	// longDataSize := mc.maxAllowedPacket / (stmt.paramCount + 1)
-	longDataSize := 1000
+	longDataSize := 100000000000
 	if longDataSize < 64 {
 		longDataSize = 64
 	}
